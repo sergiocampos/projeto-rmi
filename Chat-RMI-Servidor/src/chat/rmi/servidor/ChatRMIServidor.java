@@ -5,7 +5,12 @@
  */
 package chat.rmi.servidor;
 
+import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,14 +20,16 @@ import java.util.logging.Logger;
  */
 public class ChatRMIServidor {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    final static String host = "rmi://192.168.10.120/Servidor";
+    
+    public static void main(String[] args) throws AlreadyBoundException, MalformedURLException {
         try {
+            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             Servidor server = new Servidor();
-            IServidor i = (IServidor)
-            server.conecta(c);
+            Naming.bind(host, server);
+            
+            //server.conecta(c);
+            
         } catch (RemoteException ex) {
             Logger.getLogger(ChatRMIServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
