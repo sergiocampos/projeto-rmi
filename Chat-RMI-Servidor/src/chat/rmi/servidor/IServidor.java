@@ -5,6 +5,7 @@
  */
 package chat.rmi.servidor;
 
+import chat.rmi.cliente.Cliente;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,6 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface IServidor extends Remote{
     
+    public void conecta(Cliente c) throws RemoteException;
     public void bye() throws RemoteException;
     public void sendAll() throws RemoteException;
     public void sendUser() throws RemoteException;
