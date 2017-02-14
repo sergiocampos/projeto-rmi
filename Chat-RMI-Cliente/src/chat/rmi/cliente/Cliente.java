@@ -21,6 +21,7 @@ public class Cliente implements ICliente{
         System.out.println(m);
     }
     
+    @Override
     public String getNome(){
         return nome;
     }

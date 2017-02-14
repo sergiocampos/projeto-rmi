@@ -5,7 +5,6 @@
  */
 package chat.rmi.servidor;
 
-import chat.rmi.cliente.Cliente;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import java.util.HashMap;
  * @author sergiocampos
  */
 public class Servidor extends UnicastRemoteObject implements IServidor{
-    private HashMap<String,Cliente> lista_clientes = new HashMap<>();
+    private HashMap<String,ICliente> lista_clientes = new HashMap<>();
     private int i=0;
     
     public Servidor() throws RemoteException{}
@@ -45,11 +44,18 @@ public class Servidor extends UnicastRemoteObject implements IServidor{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param c
+     * @throws RemoteException
+     */
     @Override
-    public void conecta(Cliente c) throws RemoteException {
+    public void conecta(ICliente c) throws RemoteException {
         lista_clientes.put( Integer.toString(i) , c);
         i++;
         System.out.println("conectou: "+ c.getNome());
     }
-    
+
+
+
 }

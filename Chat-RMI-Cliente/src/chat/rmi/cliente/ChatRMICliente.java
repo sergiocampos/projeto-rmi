@@ -29,10 +29,9 @@ public class ChatRMICliente {
             Cliente c = new Cliente ("Jr");
             IServidor server;
             server = (IServidor) Naming.lookup(host_url);
-            server.conecta(c);
+            server.conecta((chat.rmi.servidor.ICliente) c);
         } catch (RemoteException | NotBoundException | MalformedURLException ex) {
             Logger.getLogger(ChatRMICliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    }   
 }
