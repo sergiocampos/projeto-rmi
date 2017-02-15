@@ -5,24 +5,28 @@
  */
 package chat.rmi.cliente;
 
+import chat.rmi.servidor.ICliente;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 /**
  *
  * @author jrpalitot
  */
-public class Cliente implements ICliente{
+public class Cliente extends UnicastRemoteObject implements ICliente{
     public String nome;
     
-    public Cliente (String nome){
+    public Cliente (String nome) throws RemoteException{
         this.nome = nome;
     }
 
     @Override
-    public void msg(String m) {
+    public void msg(String m) throws RemoteException{
         System.out.println(m);
     }
     
     @Override
-    public String getNome(){
+    public String getNome() throws RemoteException{
         return nome;
     }
     

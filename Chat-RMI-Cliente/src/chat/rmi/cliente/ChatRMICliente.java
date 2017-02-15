@@ -24,12 +24,12 @@ public class ChatRMICliente {
      */
     public static void main(String[] args) {
         try {
-            String host_url = "rmi://192.168.10.120";
-
-            Cliente c = new Cliente ("Jr");
-            IServidor server;
-            server = (IServidor) Naming.lookup(host_url);
-            server.conecta((chat.rmi.servidor.ICliente) c);
+            Cliente cli = new Cliente("Jr");
+            IServidor server = (IServidor) Naming.lookup("rmi://localhost/Servidor");
+            server.conecta(cli);
+            server.sendUser(cli, "Jr", "Mensagem para um usuário");
+            server.sendAll(cli, "Mensagem para todos usuários");
+            server.list(cli);
         } catch (RemoteException | NotBoundException | MalformedURLException ex) {
             Logger.getLogger(ChatRMICliente.class.getName()).log(Level.SEVERE, null, ex);
         }

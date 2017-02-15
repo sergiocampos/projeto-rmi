@@ -14,9 +14,9 @@ import java.rmi.RemoteException;
  */
 public interface IServidor extends Remote{
     public void conecta(ICliente c) throws RemoteException;
-    public void bye() throws RemoteException;
-    public void sendAll() throws RemoteException;
-    public void sendUser() throws RemoteException;
-    public void list() throws RemoteException;
+    public void bye(ICliente c) throws RemoteException;
+    public void sendAll(ICliente c, String msg) throws RemoteException;
+    public void sendUser(ICliente c, String nome, String msg) throws RemoteException;
+    public void list(ICliente c) throws RemoteException;
     public void rename() throws RemoteException;
 }

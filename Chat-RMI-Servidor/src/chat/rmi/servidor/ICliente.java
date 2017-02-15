@@ -5,11 +5,14 @@
  */
 package chat.rmi.servidor;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author jrpalitot
  */
-public interface ICliente {
-    public void msg(String m);
-    public String getNome();
+public interface ICliente extends Remote{
+    public void msg(String m) throws RemoteException;
+    public String getNome() throws RemoteException;
 }

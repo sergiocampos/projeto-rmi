@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class ChatRMIServidor {
 
-    final static String host = "rmi://192.168.10.120/Servidor";
+    final static String host = "Servidor";
     
     public static void main(String[] args) throws AlreadyBoundException, MalformedURLException {
         try {
