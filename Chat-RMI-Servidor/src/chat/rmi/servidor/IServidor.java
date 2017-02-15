@@ -18,5 +18,5 @@ public interface IServidor extends Remote{
     public void sendAll(ICliente c, String msg) throws RemoteException;
     public void sendUser(ICliente c, String nome, String msg) throws RemoteException;
     public void list(ICliente c) throws RemoteException;
-    public void rename() throws RemoteException;
+    public void rename(ICliente c, String nome) throws RemoteException;
 }

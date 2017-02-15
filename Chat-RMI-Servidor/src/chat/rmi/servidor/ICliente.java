@@ -15,4 +15,6 @@ import java.rmi.RemoteException;
 public interface ICliente extends Remote{
     public void msg(String m) throws RemoteException;
     public String getNome() throws RemoteException;
+    public void setNome(String nome) throws RemoteException;
+    public void bye() throws RemoteException;
 }

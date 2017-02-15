@@ -29,5 +29,15 @@ public class Cliente extends UnicastRemoteObject implements ICliente{
     public String getNome() throws RemoteException{
         return nome;
     }
+
+    @Override
+    public void setNome(String nome) throws RemoteException {
+        this.nome = nome;
+    }
+
+    @Override
+    public void bye() throws RemoteException {
+        System.exit(0);
+    }
     
 }

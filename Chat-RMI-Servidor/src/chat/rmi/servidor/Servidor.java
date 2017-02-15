@@ -22,8 +22,8 @@ public class Servidor extends UnicastRemoteObject implements IServidor{
     @Override
     public void bye(ICliente c) throws RemoteException {
         this.sendAll(c, "Deixou a sala");
-        //TO DO : Criar chamada no cliente para finalizar aplicação...
         lista_clientes.remove(c.getNome());
+        c.bye();
     }
 
     @Override
@@ -53,8 +53,15 @@ public class Servidor extends UnicastRemoteObject implements IServidor{
     }
 
     @Override
-    public void rename() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void rename(ICliente c, String nome) throws RemoteException {
+        if (lista_clientes.get(nome) != null){
+            c.msg("Já existe um usuário com este nome");
+        }else{
+            this.sendAll(c, "Renomeado para " + nome);
+            lista_clientes.remove(c.getNome());
+            c.setNome(nome);
+            lista_clientes.put(c.getNome() , new Usuario(c));
+        }
     }
 
     /**
