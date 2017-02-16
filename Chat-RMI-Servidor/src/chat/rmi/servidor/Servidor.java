@@ -67,17 +67,20 @@ public class Servidor extends UnicastRemoteObject implements IServidor{
     /**
      *
      * @param c
+     * @return 
      * @throws RemoteException
      */
     @Override
-    public void conecta(ICliente c) throws RemoteException {
+    public boolean conecta(ICliente c) throws RemoteException {
         if (lista_clientes.get(c.getNome()) != null){
             c.msg("Já existe um usuário com este nome");
-        }else{
-            lista_clientes.put(c.getNome() , new Usuario(c));
-            this.sendAll(c, "Está Online");
-            lista_clientes.get(c.getNome()).getCliente().msg("Seja bem vindo, " + c.getNome());
+            return false;
         }
+        lista_clientes.put(c.getNome() , new Usuario(c));
+        this.sendAll(c, "Está Online");
+        lista_clientes.get(c.getNome()).getCliente().msg("Seja bem vindo, " + c.getNome());
+        
+        return true;
     }
 
 
