@@ -30,7 +30,9 @@ public class Servidor extends UnicastRemoteObject implements IServidor{
     public void sendAll(ICliente c, String msg) throws RemoteException {
         for(Map.Entry<String, Usuario> entry: lista_clientes.entrySet()){
             Usuario usr = entry.getValue();
-            usr.getCliente().msg(c.getNome() + ": "+ msg);
+            if (!c.getNome().equals( usr.getCliente().getNome())){
+                usr.getCliente().msg(c.getNome() + ": "+ msg);
+            }
         }
     }
 
@@ -39,17 +41,18 @@ public class Servidor extends UnicastRemoteObject implements IServidor{
         if (lista_clientes.get(nome) == null){
             lista_clientes.get(c.getNome()).getCliente().msg("Nenhum usuário com esse nome");
         }else{
-            lista_clientes.get(nome).getCliente().msg(nome + ": "+ msg);
+            lista_clientes.get(nome).getCliente().msg(c.getNome() + ": "+ msg);
         }
     }
 
     @Override
     public void list(ICliente c) throws RemoteException {
+        String usuarios = "";
         for(Map.Entry<String, Usuario> entry: lista_clientes.entrySet()){
             Usuario usr = entry.getValue();
-            usr.getCliente().msg(lista_clientes.toString());
-            // TO DO: Melhorar exibição
+            usuarios += "- " + usr.getCliente().getNome() + "\n";
         }
+        c.msg(usuarios);
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,13 +27,11 @@ public class ChatRMICliente {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SimpleDateFormat sdf;
+        SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
         Scanner enviar_mensagem = new Scanner (System.in);
         String opcao;
         String mensagem;
         String nome;
-        //DataOutputStream dataOutputStream;
-        Calendar data_atual;
         
         try {
             IServidor server = (IServidor) Naming.lookup("rmi://localhost/Servidor");
@@ -70,7 +69,7 @@ public class ChatRMICliente {
                         {
                             System.out.println("Mensagem: ");
                             mensagem = enviar_mensagem.nextLine();
-                            server.sendAll(cli, mensagem);
+                            server.sendAll(cli, mensagem + " " + sdf.format(new Date()));
 
                             break;
                         }
@@ -80,7 +79,7 @@ public class ChatRMICliente {
                             nome = enviar_mensagem.nextLine();
                             System.out.println("Mensagem: ");
                             mensagem = enviar_mensagem.nextLine();
-                            server.sendUser(cli, nome, mensagem);
+                            server.sendUser(cli, nome, mensagem  + " " + sdf.format(new Date()));
 
                             break;
                         }
